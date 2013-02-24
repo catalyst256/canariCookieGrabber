@@ -36,7 +36,7 @@ class netscalerCookie(CookieGrabber):
   pass
 
 
-@EntityField(name='lbname', propname='lbname', displayname='Load Balancer Name')
+
 @EntityField(name='lbip',propname='lbip', displayname='Load Balancer IP')
 @EntityField(name='lbport',propname='lbport', displayname='Load Balancer Port')
 

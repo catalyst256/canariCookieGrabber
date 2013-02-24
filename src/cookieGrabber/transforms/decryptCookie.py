@@ -29,7 +29,7 @@ __all__ = [
     label='To Decrypt Netscaler Cookie',
     description='Takes the encrypted Netscaler Cookie and decrypts it',
     uuids=[ 'decryptCookie.v2.cookieToclearText' ],
-    inputs=[ ( 'Reconnaissance', netscalerCookie ) ],
+    inputs=[ ( 'Web Sites', netscalerCookie ) ],
     debug=True
 )
 def dotransform(request, response):
