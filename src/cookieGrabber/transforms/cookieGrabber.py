@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
-import requests
-import sys
-import re
+import requests, sys, re
 from canari.maltego.entities import Website
 from canari.maltego.message import UIMessage
 from common.entities import CookieGrabber, netscalerCookie
@@ -33,6 +31,7 @@ __all__ = [
 )
 def dotransform(request, response):
     
+    proto = ''
     buff = request.fields
     for key, value in buff.iteritems():
 	  if key == 'website.ssl-enabled' and value == 'true':
@@ -40,7 +39,7 @@ def dotransform(request, response):
 	  else:
 		proto = 'http'
 
-	  r = requests.get(proto +'://' +  request.value)
+    r = requests.get(proto +'://' +  request.value)
     cookie = str(r.cookies)
     for s in re.finditer('NSC_([a-zA-Z0-9\_\.\-\:\=]*)=[0-9a-f]{8}([0-9a-f]{8})[a-f0-9]{24}([0-9a-f]{4})',cookie):
       if s is not None:
@@ -49,6 +48,7 @@ def dotransform(request, response):
 		e.enclbip = s.group(2)
 		e.enclbport = s.group(3)
 		response += e
+
       else:
-	print 'No Cookie Found'
+        print 'No Cookie Found'
     return response  
